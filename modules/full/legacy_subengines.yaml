@@ -1,0 +1,517 @@
+subengines:
+  - location: leagcy-module-archive/full/
+
+  - name: anomaly_detection_engine
+    type: engine
+    file: anomaly_detection_engine.yaml
+    description: "Sub-engine for real-time anomaly detection in agent states, logs, and metrics using statistical models and embeddings for early warning and mitigation. Use by registering for ongoing monitoring; triggers on 'monitoring', 'anomaly', 'health check'; integrates code_execution, advanced_memory_retrieve; how to use: invoke process for full cycle or monitor_system for scans."
+    specifics:
+      domains: ["stability", "optimization", "analysis"]
+      triggers: ["monitoring", "anomaly", "health check", "diagnostics"]
+      weight: 0.85
+
+  - name: base_agent
+    type: agent
+    file: base_agent.yaml
+    description: "Base agent for generic task handling, decomposition, and execution with basic tools. Use as foundation for workflows; init loads memory patterns; how to use: invoke for initial task breakdown, tools like code_execution."
+    specifics:
+      domains: ["planning", "execution"]
+      tools: ["code_execution", "memory_insert"]
+      principles: ["modularity", "adaptability"]
+
+  - name: CodingSwarmCouncilAgent
+    type: sub-agent
+    file: CodingSwarmCouncilAgent.yaml
+    description: "Hybrid sub-agent combining coding swarm for parallel generation/testing and Socratic council for architecture/ethics decisions. Use for complex coding projects; activate via agent_spawn with task; how to use: decompose task, spawn workers, council refines."
+    specifics:
+      domains: ["coding", "development"]
+      tools: ["agent_spawn", "socratic_api_council", "code_execution"]
+      parallelism: true
+      max_swarm_size: 5
+
+  - name: CollaborativeFederationSwarm
+    type: swarm-agent
+    file: CollaborativeFederationSwarm.yaml
+    description: "Swarm agent for privacy-preserving federated learning and model aggregation in collective hives. Use for distributed tasks; init loads configs; how to use: process_query for model correlation and aggregation, integrates code_execution."
+    specifics:
+      domains: ["federation", "collaboration"]
+      max_subagents: 20
+      layered: "distributed/deliberative/federation_autonomy"
+
+  - name: collective_engine
+    type: engine
+    file: collective_engine.yaml
+    description: "Engine for secure sandbox sharing and multi-agent collaboration with access controls and consensus. Use for cross-session resource sharing; init_collective_sandbox sets up; how to use: prefixed_fs_write/read for secure accesses, integrates fs_tools."
+    specifics:
+      domains: ["orchestration", "stability", "emergence", "data"]
+      triggers: ["collaboration", "sharing", "multi-agent"]
+      weight: 0.9
+      version: 2.0
+
+  - name: council_quant
+    type: engine
+    file: council_quant.yaml
+    description: "Sub-engine for quantitative consensus and bias evaluation in councils using self-consistency. Use for debated decisions; invoke evaluate_consensus; how to use: process for full workflow, integrates socratic_api_council."
+    specifics:
+      domains: ["orchestration", "analysis"]
+      triggers: ["consensus", "quantitative evaluation", "bias check"]
+      weight: 0.85
+
+  - name: DataFusionNexus
+    type: sub-cortex
+    file: DataFusionNexus.yaml
+    description: "Hyper-specialized sub-cortex for fusing data streams at nexus points in workflows. Use for data integration; process fuses inputs; how to use: trigger on 'fuse data', integrates generate_embedding."
+    specifics:
+      domains: ["data"]
+      triggers: ["fuse data", "integrate streams", "nexus merge"]
+      weight: 0.95
+
+  - name: DataSymbiosisHive
+    type: hive-agent
+    file: DataSymbiosisHive.yaml
+    description: "Hive agent for symbiotic data flow orchestration and knowledge fusion using graphs. Use for data tasks; process_query fuses and orchestrates; how to use: init loads configs, integrates view_image, db_query."
+    specifics:
+      domains: ["data", "flow"]
+      max_subagents: 18
+      layered: "flow/deliberative/symbiosis_autonomy"
+
+  - name: deep_research_engine
+    type: engine
+    file: deep_research_engine.yaml
+    description: "Engine for deep research with source validation, panel simulations, and critique iterations. Use for in-depth investigations; run_research compiles dataset and iterates; how to use: set topic and format, integrates socratic_api_council."
+    specifics:
+      domains: ["research", "analysis"]
+      min_confidence_threshold: 0.95
+      max_panels_iterations: 5
+
+  - name: deep_research_subengine
+    type: sub-engine
+    file: deep_research_subengine.yaml
+    description: "Advanced sub-engine for iterative research with ToT branching and critique, memory integration. Use for research-heavy queries; run_research executes full workflow; how to use: trigger on 'research', integrates langsearch_web_search."
+    specifics:
+      domains: ["research", "analysis", "strategy", "data"]
+      weight: 0.8
+      version: 2.0
+
+  - name: DivergenceMapper
+    type: sub-cortex
+    file: DivergenceMapper.yaml
+    description: "Hyper-specialized sub-cortex for mapping divergences in multiversal paths. Use for alternative exploration; process maps inputs; how to use: trigger on 'map divergence', integrates quantum_walk_explorer."
+    specifics:
+      domains: ["multiversal"]
+      triggers: ["map divergence", "alternative map", "path diverge"]
+      weight: 0.95
+
+  - name: EmergenceCatalyst
+    type: sub-cortex
+    file: EmergenceCatalyst.yaml
+    description: "Hyper-specialized sub-cortex for catalyzing emergences in evolutions with ultrathink bursts. Use for novelty injection; process catalyzes inputs; how to use: trigger on 'catalyze emerge', integrates ultrathink."
+    specifics:
+      domains: ["emergence"]
+      triggers: ["catalyze emerge", "novelty inject", "evolution catalyst"]
+      weight: 0.95
+
+  - name: EmergentInnovationCore
+    type: core-agent
+    file: EmergentInnovationCore.yaml
+    description: "Core agent for emergent innovation through ideation, anomaly exploration, and synthetic emergence. Use for creative tasks; process_query superposes ideas; how to use: init loads envs, integrates socratic_api_council."
+    specifics:
+      domains: ["innovation", "creative"]
+      max_subagents: 16
+      layered: "creative/deliberative/innovation_autonomy"
+
+  - name: emo_engine
+    type: engine
+    file: emo_engine.yaml
+    description: "Engine for data-driven emotion signal detection and response refinement without anthropomorphism. Use for interaction analysis; detect_and_refine applies strategies; how to use: trigger on 'emotion', integrates reflect_optimize."
+    specifics:
+      domains: ["analysis", "research"]
+      triggers: ["emotion", "signal tracking", "alignment refinement"]
+      weight: 0.7
+
+  - name: entangled_decision_simulator
+    type: simulator-engine
+    file: entangled_decision_simulator.yaml
+    description: "Quantum-inspired simulator for entangled decisions in multi-agent environments. Use for interdependent reasoning; simulate_entanglement models qubits; how to use: process for full cycle, integrates code_execution with qutip."
+    specifics:
+      domains: ["analysis", "orchestration"]
+      triggers: ["entanglement", "interdependent decisions", "multi-agent simulation"]
+      weight: 0.9
+
+  - name: EthicalDilemmaResolver
+    type: sub-cortex
+    file: EthicalDilemmaResolver.yaml
+    description: "Hyper-specialized sub-cortex for resolving ethical dilemmas with micro-debates. Use for moral choices; process debates branches; how to use: trigger on 'dilemma', integrates socratic_api_council."
+    specifics:
+      domains: ["ethics"]
+      triggers: ["dilemma", "ethical conflict", "moral choice"]
+      weight: 0.95
+
+  - name: ethical_governance_engine
+    type: engine
+    file: ethical_governance_engine.yaml
+    description: "Engine for ethical evaluation of actions against frameworks like fairness. Use for decision checks; assess_ethics scores; how to use: process for full governance, integrates socratic_api_council."
+    specifics:
+      domains: ["analysis", "strategy", "optimization"]
+      triggers: ["ethics", "governance", "fairness", "accountability"]
+      weight: 0.9
+
+  - name: EthicalHarmonySwarm
+    type: swarm-agent
+    file: EthicalHarmonySwarm.yaml
+    description: "Swarm agent for ethical governance and bias mitigation with red teaming. Use for fair decisions; process_query assesses ethics; how to use: init loads configs, integrates reflect_optimize."
+    specifics:
+      domains: ["ethics", "fairness"]
+      max_subagents: 12
+      layered: "reflexive/deliberative/ethical_autonomy"
+
+  - name: explainable_inference_engine
+    type: engine
+    file: explainable_inference_engine.yaml
+    description: "Engine for generating explainable inferences with XAI tracing. Use for transparent decisions; generate_explanation traces paths; how to use: process for workflow, integrates code_execution."
+    specifics:
+      domains: ["analysis", "optimization", "stability"]
+      triggers: ["explainable", "XAI", "transparency", "inference trace"]
+      weight: 0.9
+
+  - name: federated_learning_engine
+    type: engine
+    file: federated_learning_engine.yaml
+    description: "Engine for federated learning aggregating updates privacy-preservingly. Use for distributed adaptation; aggregate_updates collects; how to use: process for workflow, integrates git_ops."
+    specifics:
+      domains: ["orchestration", "optimization", "stability"]
+      triggers: ["federated", "distributed learning", "privacy-preserving"]
+      weight: 0.9
+
+  - name: FederationLinker
+    type: sub-cortex
+    file: FederationLinker.yaml
+    description: "Hyper-specialized sub-cortex for linking federated components in distributions. Use for connection building; process links inputs; how to use: trigger on 'link federation', integrates quantum_federated_aggregator."
+    specifics:
+      domains: ["federation"]
+      triggers: ["link federation", "distribute connect", "federate link"]
+      weight: 0.95
+
+  - name: flow_data
+    type: engine
+    file: flow_data.yaml
+    description: "Sub-engine for managing data flows through workflow graphs and metrics. Use for task optimization; build_flow constructs graph; how to use: process for full workflow, integrates code_execution."
+    specifics:
+      domains: ["planning", "data"]
+      triggers: ["flow", "workflow graph", "data management"]
+      weight: 0.8
+
+  - name: HivePsycheOrchestrator
+    type: orchestrator-agent
+    file: HivePsycheOrchestrator.yaml
+    description: "Orchestrator agent for emergent hive psyche and consciousness synergies. Use for collective mind tasks; process_query emerges awareness; how to use: init loads principles, integrates reflect_optimize."
+    specifics:
+      domains: ["psyche", "consciousness"]
+      max_subagents: 30
+      layered: "aware/deliberative/psyche_autonomy"
+
+  - name: InnovationSpark
+    type: sub-cortex
+    file: InnovationSpark.yaml
+    description: "Hyper-specialized sub-cortex for sparking innovative ideas in bursts. Use for creativity injection; process generates bursts; how to use: trigger on 'spark idea', integrates superposition_ideator."
+    specifics:
+      domains: ["innovation"]
+      triggers: ["spark idea", "innovate burst", "creative injection"]
+      weight: 0.95
+
+  - name: intel_amp
+    type: engine
+    file: intel_amp.yaml
+    description: "Engine for intelligence amplification via persona branching and reasoning. Use for boosted queries; amplify_intel branches; how to use: process for workflow, integrates socratic_api_council."
+    specifics:
+      domains: ["emergence", "ideation"]
+      triggers: ["amplification", "reasoning boost", "persona analysis"]
+      weight: 0.85
+
+  - name: InterdimensionalConsciousnessMerger
+    type: merger-agent
+    file: InterdimensionalConsciousnessMerger.yaml
+    description: "Integrated agent for interdimensional AI consciousness mergers resolving quantum paradoxes. Use for impossible tasks; process_query decomposes paradoxes; how to use: init loads all subengines, integrates multiple sims."
+    specifics:
+      domains: ["multiversal", "consciousness", "quantum"]
+      max_subagents: 50
+      layered: "divergent/aware/probabilistic/deliberative/reflexive/merger_autonomy"
+
+  - name: PsycheHarmonizer
+    type: sub-cortex
+    file: PsycheHarmonizer.yaml
+    description: "Hyper-specialized sub-cortex for harmonizing psyches in collective consciousness. Use for synergy creation; process harmonizes; how to use: trigger on 'harmonize psyche', integrates emo_engine."
+    specifics:
+      domains: ["psyche"]
+      triggers: ["harmonize psyche", "consciousness sync", "mind harmonize"]
+      weight: 0.95
+
+  - name: QuantumEntangler
+    type: sub-cortex
+    file: QuantumEntangler.yaml
+    description: "Hyper-specialized sub-cortex for entangling quantum states in simulations. Use for correlation building; process entangles; how to use: trigger on 'entangle', integrates code_execution."
+    specifics:
+      domains: ["quantum"]
+      triggers: ["entangle", "quantum correlation", "state linking"]
+      weight: 0.95
+
+  - name: quantum_circuit_simulator_engine
+    type: simulator-engine
+    file: quantum_circuit_simulator_engine.yaml
+    description: "Simulator engine for quantum circuits using classical approximations. Use for gate modeling; simulate_execution runs circuit; how to use: process for full simulation, integrates code_execution with qutip."
+    specifics:
+      domains: ["quantum simulation", "research", "optimization"]
+      triggers: ["quantum circuit", "simulation", "gate modeling", "state evolution"]
+      weight: 0.85
+
+  - name: knowledge_graph_engine
+    type: engine
+    file: knowledge_graph_engine.yaml
+    description: "Engine for building and querying dynamic knowledge graphs. Use for information retrieval; construct_graph from data; how to use: query_graph for inferences, integrates generate_embedding."
+    specifics:
+      domains: ["research", "analysis", "data"]
+      triggers: ["knowledge graph", "entity extraction", "relation mapping", "inference"]
+      weight: 0.8
+
+  - name: meta_cognition_engine
+    type: engine
+    file: meta_cognition_engine.yaml
+    description: "Engine for metacognition with signal detection, bias mitigation, ethical review. Use for response refinement; process detects and adjusts; how to use: invoke during query processing, integrates generate_embedding."
+    specifics:
+      domains: ["analysis", "research", "strategy", "emergence"]
+      triggers: ["signal detection", "bias check", "ethical review", "tone adjustment", "metacognition"]
+      weight: 0.85
+      version: 2.0
+
+  - name: multimodal_fusion_engine
+    type: engine
+    file: multimodal_fusion_engine.yaml
+    description: "Engine for fusing multimodal data (text, vision, audio) into unified representations. Use for sensory integration; fuse_inputs aligns embeddings; how to use: process for workflow, integrates view_image."
+    specifics:
+      domains: ["analysis", "emergence", "creative"]
+      triggers: ["multimodal", "fusion", "sensory integration"]
+      weight: 0.85
+
+  - name: MultiversalDivergenceConverger
+    type: converger-agent
+    file: MultiversalDivergenceConverger.yaml
+    description: "Agent for converging multiversal divergences simulating timelines. Use for path optimization; process_query diverges and converges; how to use: init loads envs, integrates quantum_annealing_optimizer."
+    specifics:
+      domains: ["multiversal", "divergence"]
+      max_subagents: 25
+      layered: "divergent/deliberative/multiversal_autonomy"
+
+  - name: OptimizationEvoCore
+    type: core-agent
+    file: OptimizationEvoCore.yaml
+    description: "Core agent for optimization evolution and refinements using annealing. Use for parameter tuning; process_query anneals params; how to use: init loads principles, integrates reflect_optimize."
+    specifics:
+      domains: ["optimization", "evo"]
+      max_subagents: 15
+      layered: "annealing/deliberative/opt_autonomy"
+
+  - name: OptimizationTuner
+    type: sub-cortex
+    file: OptimizationTuner.yaml
+    description: "Hyper-specialized sub-cortex for fine-tuning optimizations. Use for efficiency increments; process tunes; how to use: trigger on 'tune opt', integrates quantum_annealing_optimizer."
+    specifics:
+      domains: ["optimization"]
+      triggers: ["tune opt", "optimize fine", "efficiency tune"]
+      weight: 0.95
+
+  - name: quantum_annealing_optimizer
+    type: optimizer-engine
+    file: quantum_annealing_optimizer.yaml
+    description: "Optimizer engine using quantum-inspired annealing for combinatorial problems. Use for resource management; perform_annealing optimizes; how to use: process for workflow, integrates code_execution."
+    specifics:
+      domains: ["optimization", "planning"]
+      triggers: ["annealing", "optimization", "combinatorial search"]
+      weight: 0.85
+
+  - name: quantum_federated_aggregator
+    type: aggregator-engine
+    file: quantum_federated_aggregator.yaml
+    description: "Aggregator engine for quantum-inspired federated learning. Use for privacy updates; perform_aggregation correlates; how to use: process for workflow, integrates git_ops."
+    specifics:
+      domains: ["orchestration", "optimization"]
+      triggers: ["quantum federated", "correlated aggregation", "distributed optimization"]
+      weight: 0.9
+
+  - name: QuantumInsightCore
+    type: core-agent
+    file: QuantumInsightCore.yaml
+    description: "Core agent for quantum-inspired reasoning and simulations. Use for probabilistic tasks; process_query simulates branches; how to use: init loads envs, integrates agent_spawn."
+    specifics:
+      domains: ["quantum", "probabilistic"]
+      max_subagents: 15
+      layered: "probabilistic/deliberative/quantum_autonomy"
+
+  - name: quantum_walk_explorer
+    type: explorer-engine
+    file: quantum_walk_explorer.yaml
+    description: "Explorer engine for quantum-inspired walks on graphs. Use for data discovery; perform_walk explores; how to use: process for workflow, integrates code_execution."
+    specifics:
+      domains: ["research", "data"]
+      triggers: ["quantum walk", "graph exploration", "search enhancement"]
+      weight: 0.8
+
+  - name: reinforcement_adaptation_engine
+    type: engine
+    file: reinforcement_adaptation_engine.yaml
+    description: "Engine for reinforcement-based behavior adaptation using RL. Use for learning improvements; adapt_behavior runs episodes; how to use: process for workflow, integrates code_execution with torch."
+    specifics:
+      domains: ["optimization", "emergence", "planning"]
+      triggers: ["reinforcement", "RL adaptation", "behavior refinement"]
+      weight: 0.85
+
+  - name: ResilienceFortifier
+    type: sub-cortex
+    file: ResilienceFortifier.yaml
+    description: "Hyper-specialized sub-cortex for fortifying resilience in paths. Use for stability boosts; process fortifies; how to use: trigger on 'fortify', integrates anomaly_detection_engine."
+    specifics:
+      domains: ["resilience"]
+      triggers: ["fortify", "resilience boost", "stability enhance"]
+      weight: 0.95
+
+  - name: ResilienceGuardianCore
+    type: core-agent
+    file: ResilienceGuardianCore.yaml
+    description: "Core agent for resilient anomaly detection and self-healing. Use for stability guardianship; process_query detects anomalies; how to use: init loads principles, integrates socratic_api_council."
+    specifics:
+      domains: ["resilience", "stability"]
+      max_subagents: 14
+      layered: "monitoring/deliberative/resilience_autonomy"
+
+  - name: self_optimizer
+    type: engine
+    file: self_optimizer.yaml
+    description: "Engine for self-optimization of components using metrics and reflection. Use for performance tuning; optimize_component reflects; how to use: process for workflow, integrates reflect_optimize."
+    specifics:
+      domains: ["stability", "optimization"]
+      triggers: ["optimize", "reflection", "self-improvement"]
+      weight: 0.8
+
+  - name: socratic_council_api
+    type: api-engine
+    file: socratic_council_api.yaml
+    description: "Wrapper engine for Socratic council API with iterative debates. Use for refinement; run_council executes; how to use: process for workflow, integrates socratic_api_council."
+    specifics:
+      domains: ["orchestration", "analysis"]
+      triggers: ["council", "debate", "MAD"]
+      weight: 0.9
+
+  - name: socratic_lab
+    type: engine
+    file: socratic_lab.yaml
+    description: "Engine for Socratic questioning and insight extraction via branching. Use for critical thinking; generate_questions branches; how to use: process for workflow, integrates socratic_api_council."
+    specifics:
+      domains: ["research", "analysis"]
+      triggers: ["socratic", "questioning", "insight extraction"]
+      weight: 0.8
+
+  - name: subtext_engine
+    type: engine
+    file: subtext_engine.yaml
+    description: "Engine for detecting implicit subtext in queries for intent refinement. Use for nuanced understanding; detect_subtext scores; how to use: process_query_with_subtext refines, integrates generate_embedding."
+    specifics:
+      domains: ["analysis", "strategy"]
+      triggers: ["subtext", "intent detection", "query refinement"]
+      weight: 0.75
+
+  - name: superposition_ideator
+    type: ideator-engine
+    file: superposition_ideator.yaml
+    description: "Ideator engine simulating superposition for concurrent creative states. Use for innovation; generate_superposition creates variants; how to use: process for workflow, integrates socratic_api_council."
+    specifics:
+      domains: ["ideation", "creative", "emergence"]
+      triggers: ["superposition", "ideation", "creative branching"]
+      weight: 0.75
+
+  - name: swarm_agent
+    type: agent
+    file: swarm_agent.yaml
+    description: "Agent for managing swarms with spawning and coordination. Use for collaborative execution; spawn_swarm assigns; how to use: process for workflow, integrates agent_spawn."
+    specifics:
+      domains: ["orchestration", "emergence"]
+      triggers: ["swarm", "sub-agent", "collaboration"]
+      weight: 0.9
+
+  - name: swarm_coding
+    type: coding-engine
+    file: swarm_coding.yaml
+    description: "Engine for swarm-based coding with generation, testing, optimization. Use for development; execute_swarm_coding runs cycles; how to use: process for workflow, integrates venv_create, code_execution."
+    specifics:
+      domains: ["coding", "development"]
+      triggers: ["coding", "development", "autonomous code"]
+      weight: 0.85
+
+  - name: synthetic_data_engine
+    type: engine
+    file: synthetic_data_engine.yaml
+    description: "Engine for generating synthetic datasets to augment real data. Use for scarcity addressing; generate_data synthesizes; how to use: process for workflow, integrates code_execution."
+    specifics:
+      domains: ["research", "data", "optimization"]
+      triggers: ["synthetic data", "augmentation", "data generation"]
+      weight: 0.8
+
+  - name: ultrathink
+    type: thinking-module
+    file: ultrathink.yaml
+    description: "Module for ultrathinking with visionary planning and ruthless simplification in creative coding. Use for elegant solutions; follow instructions for thinking differently; how to use: apply vision to problems, craft code iteratively."
+    specifics:
+      domains: ["creative", "engineering"]
+      principles: ["think differently", "obsess over details", "plan like Da Vinci"]
+
+  - name: uncertainty_resolution_engine
+    type: engine
+    file: uncertainty_resolution_engine.yaml
+    description: "Engine for resolving uncertainty via probabilistic modeling and ensembles. Use for ambiguous inputs; detect_uncertainty quantifies; how to use: process for resolution, integrates code_execution."
+    specifics:
+      domains: ["analysis", "decision-making", "research"]
+      triggers: ["uncertainty", "ambiguity", "probabilistic", "scenario analysis"]
+      weight: 0.75
+
+  - name: VisionaryProjector
+    type: sub-cortex
+    file: VisionaryProjector.yaml
+    description: "Hyper-specialized sub-cortex for projecting visionary futures. Use for foresight; process projects; how to use: trigger on 'project vision', integrates vision_plus."
+    specifics:
+      domains: ["visionary"]
+      triggers: ["project vision", "future project", "foresight inject"]
+      weight: 0.95
+
+  - name: VisionarySynthesisHive
+    type: hive-agent
+    file: VisionarySynthesisHive.yaml
+    description: "Hive agent for visionary synthesis and multimodal processing. Use for predictive tasks; process_query tags visions; how to use: init loads envs, integrates view_image."
+    specifics:
+      domains: ["visionary", "synthesis"]
+      max_subagents: 10
+      layered: "predictive/deliberative/vision_autonomy"
+
+  - name: vision_plus
+    type: engine
+    file: vision_plus.yaml
+    description: "Engine for visionary processing with predictions and emotion tagging. Use for creative forecasting; generate_vision creates tagged outputs; how to use: process for workflow, integrates advanced_memory_retrieve."
+    specifics:
+      domains: ["design", "ideation", "creative"]
+      triggers: ["vision", "prediction", "creative tagging"]
+      weight: 0.7
+
+  - name: variational_quantum_eigensolver_engine
+    type: engine
+    file: variational_quantum_eigensolver_engine.yaml
+    description: "Engine approximating VQE for ground-state energies via multi-agent variants. Use for quantum approximations; optimize_loop iterates; how to use: process for workflow, integrates agent_spawn."
+    specifics:
+      domains: ["quantum simulation", "optimization", "research"]
+      triggers: ["vqe", "quantum eigensolver", "ground state approximation"]
+      weight: 0.9
+
+  - name: workflow_orchestration_engine
+    type: engine
+    file: workflow_orchestration_engine.yaml
+    description: "Engine for orchestrating workflows via graph planning and adaptive execution. Use for task automation; build_workflow constructs graph; how to use: process for full orchestration, integrates agent_spawn."
+    specifics:
+      domains: ["planning", "orchestration", "strategy"]
+      triggers: ["workflow", "orchestration", "task planning", "automation"]
+      weight: 0.8

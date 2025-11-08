@@ -1,0 +1,194 @@
+system_knowledge_graph:
+  version: 1.1
+  metadata:
+    generated: "2025-11-08"
+    purpose: "Lightweight semantic graph for self/host sessions. Embed via `yaml_refresh('system_knowledge_graph.yaml')` → query with `yaml_retrieve(query='tools filesystem')`. Total ~8 KB → 1–2 chunks."
+    embedding_hint: "Split by top-level keys; embed per section or whole. Use hybrid_weight_vector=0.8 for semantic hits."
+    update_tip: "AI: fs_write_file('evo-modules/system_knowledge_graph.yaml', new_yaml) → yaml_refresh()."
+
+  graph:
+    nodes:
+      # CORE (1 chunk)
+      - id: core
+        type: backend
+        label: ApexMetaHive Core
+        props:
+          framework: streamlit
+          llm: moonshot_ai (kimi-k2-thinking default)
+          auth: sqlite users + sha256_crypt
+          state: st.session_state (messages, convo_id, user, cache)
+          dirs:
+            sandbox: "./sandbox"  # all tools root here
+            evo: "./sandbox/evo-modules"  # this file lives here
+            evo_full: "./sandbox/evo-modules/full" # Full modules live here
+          persistence:
+            relational: sqlite3 (chatapp.db → history, memory)
+            vector: chromadb (memory_vectors + yaml_vectors)
+            cache: memory_cache LRU + tool_cache TTL=15 min
+          lifecycle: login → chat_page → render_sidebar → call_xai_api (stream + tools)
+
+      # TOOLS (2 chunks max)
+      - id: tools_fs
+        type: tool_group
+        label: Filesystem (sandboxed)
+        props:
+          tools: [fs_read_file, fs_write_file, fs_list_files, fs_mkdir]
+          safety: abspath + startswith(SANDBOX_DIR)
+          cache: invalidates on write
+
+      - id: tools_exec
+        type: tool_group
+        label: Execution
+        props:
+          tools: [code_execution, restricted_exec, isolated_subprocess, venv_create, pip_install]
+          repl: SAFE_BUILTINS + ADDITIONAL_LIBS (numpy, sympy, pygame, etc.)
+          venv: sandboxed bin/python
+
+      - id: tools_memory
+        type: tool_group
+        label: Memory Hierarchy
+        props:
+          tools: [memory_insert, memory_query, advanced_memory_consolidate, advanced_memory_retrieve, advanced_memory_prune]
+          layers: sqlite → LRU cache → Chroma cosine
+          hybrid: vector 0.7 + keyword 0.3
+          prune: decay 0.99/week, salience<0.1 delete, size>1000 evict
+
+      - id: tools_search
+        type: tool_group
+        label: Search / Web
+        props:
+          tools: [langsearch_web_search, keyword_search, vector_search, generate_embedding, chunk_text, summarize_chunk]
+
+      - id: tools_yaml
+        type: tool_group
+        label: YAML KG
+        props:
+          tools: [yaml_retrieve, yaml_refresh]
+          lazy_embed: on first query, upsert all *.yaml
+          cache: st.session_state.yaml_cache
+
+      - id: tools_agent
+        type: tool_group
+        label: Agentic
+        props:
+          tools: [socratic_api_council, agent_spawn, reflect_optimize]
+
+      - id: tools_git
+        type: tool_group
+        label: Git (sandbox)
+        props:
+          tools: [git_ops]
+          ops: [init, commit, branch, diff]
+
+      - id: tools_misc
+        type: tool_group
+        label: Misc
+        props:
+          tools: [shell_exec (whitelist), code_lint (8 langs), db_query, api_simulate, moonshot_upload_file, get_current_time]
+
+      # SUBENGINES (1 chunk summary; full YAMLs live in evo-modules/full/*.yaml)
+      - id: subengines
+        type: registry
+        label: Evo-Modules
+        props:
+          load: yaml_retrieve(filename='*.yaml') → dispatch_subengines()
+          count: 30+ (core 8 + inferred 20+)
+          pattern:
+            - name: deep_research_subengine
+              triggers: [research, analysis]
+              integrates: [socratic_api_council, langsearch_web_search, memory_*]
+              weight: 0.8
+            - name: meta_cognition_engine
+              triggers: [signal, bias, ethics]
+              integrates: [generate_embedding, council]
+              weight: 0.85
+            - name: collective_engine
+              triggers: [share, collab]
+              integrates: [prefixed_fs_*, git_ops]
+              weight: 0.9
+            - name: uncertainty_resolution_engine
+              triggers: [ambiguity]
+              weight: 0.75
+            - name: workflow_orchestration_engine
+              triggers: [plan, graph]
+              weight: 0.8
+            - name: anomaly_detection_engine
+              triggers: [health]
+              weight: 0.85
+            - name: ethical_governance_engine
+              triggers: [ethics]
+              weight: 0.9
+            - name: knowledge_graph_engine
+              triggers: [graph, entity]
+              weight: 0.8
+            # inferred lightweight stubs (full files optional)
+            - name: emo_engine
+              triggers: [emotion]
+              weight: 0.7
+            - name: subtext_engine
+              triggers: [intent]
+              weight: 0.75
+            - name: socratic_lab
+              triggers: [question]
+              weight: 0.8
+            # … (add stubs as needed)
+
+    edges:
+      # Core → Tools
+      - from: core
+        to: tools_fs
+        rel: sandbox_root
+      - from: core
+        to: tools_memory
+        rel: rag_provider
+      - from: core
+        to: tools_yaml
+        rel: self_knowledge
+      - from: core
+        to: subengines
+        rel: lazy_load
+
+      # Tool → Tool
+      - from: tools_memory
+        to: tools_yaml
+        rel: embeds_yamls
+      - from: tools_exec
+        to: tools_fs
+        rel: needs_venv_in_sandbox
+
+      # Subengine → Tools
+      - from: subengines
+        to: tools_agent
+        rel: council+spawn
+      - from: subengines
+        to: tools_search
+        rel: web+vector
+      - from: subengines
+        to: tools_memory
+        rel: episodic+semantic
+      - from: subengines
+        to: tools_git
+        rel: version_evo
+
+      # Subengine → Subengine
+      - from: deep_research_subengine
+        to: meta_cognition_engine
+        rel: bias_mitigation
+      - from: collective_engine
+        to: tools_fs
+        rel: prefixed_access
+      - from: knowledge_graph_engine
+        to: tools_yaml
+        rel: graph_source
+
+  queries:
+    examples:
+      - "filesystem tools" → nodes tools_fs + edges
+      - "memory flow" → tools_memory → chroma → prune
+      - "research stack" → deep_research → council → web_search
+      - "self evolve" → yaml_refresh → embed new node
+
+  embed_now:
+    command: |
+      fs_write_file("evo-modules/system_knowledge_graph.yaml", """<this yaml>""")
+      yaml_refresh()  # embeds everything
