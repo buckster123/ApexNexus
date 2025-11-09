@@ -64,3 +64,98 @@ graph TD
         N[Web Search] --> E
         O[Git/DB/Shell] --> E
     end
+```
+
+## ⚙️ Installation
+Get started in minutes!
+
+### Prerequisites
+- Python 3.10+
+- Git
+- API Keys: `KIMI_API_KEY` (Moonshot AI), `LANGSEARCH_API_KEY` (for web search)
+
+### Steps
+1. Clone the repo:
+   ```
+   git clone https://github.com/buckster123/ApexNexus.git
+   cd ApexNexus
+   ```
+
+2. Set up virtual environment:
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+   *(Note: The script includes libraries like streamlit, openai, chromadb, sentence-transformers, etc. Add any missing to requirements.txt.)*
+
+4. Configure .env:
+   ```
+   KIMI_API_KEY=your_moonshot_key
+   LANGSEARCH_API_KEY=your_langsearch_key
+   ```
+
+5. Run the app:
+   ```
+   streamlit run app.py
+   ```
+
+### Docker (Optional)
+```
+docker build -t apexnexus .
+docker run -p 8501:8501 -e KIMI_API_KEY=your_key -e LANGSEARCH_API_KEY=your_key apexnexus
+```
+
+## 📖 Usage
+1. **Launch the App**: Access via browser at `http://localhost:8501`.
+2. **Register/Login**: Create an account for personalized history.
+3. **Chat Interface**: Input queries, upload images, enable tools as needed.
+4. **Modes & Tools**: Switch modes via keywords (e.g., "switch to auto-mode"). Use tools for real-time web searches, code execution, etc.
+5. **Evolution**: The system auto-evolves—monitor via logs and memory metrics.
+
+Example Query: "Analyze recent AI news and evolve my knowledge graph."
+
+## 🧰 Tools & Integrations
+ApexNexus boasts a robust toolkit:
+- **Filesystem**: Read/write/list/mkdir in sandbox.
+- **Code Execution**: Stateful Python REPL with libs (numpy, sympy, etc.).
+- **Memory Ops**: Insert/query/consolidate/prune with vector search.
+- **Web Search**: LangSearch API for fresh results.
+- **Git/DB/Shell**: Version control, SQL queries, safe commands.
+- **Advanced**: Venv creation, pip installs, API simulations, YAML evo-modules.
+
+Full tool reference in [tools.md](docs/tools.md).
+
+## 🔄 Self-Evolution Mechanics
+- **Boot Sequence**: Initializes sandbox, Git, databases on startup.
+- **Reflection**: Uses `reflect_optimize` and `chat_log_analyze_embed` for insights.
+- **Module Creation**: Dynamically writes/refresh YAMLs for new capabilities.
+- **Pruning**: Auto-decays and removes low-salience memories.
+
+Track evolutions in `sandbox/evo_data/logs/`.
+
+## 🤝 Contributing
+We welcome contributions! Fork, create a branch, commit changes, and PR.
+- **Issues**: Report bugs or suggest features.
+- **Code Style**: Follow PEP8; lint with Black.
+- **Tests**: Add to `tests/` and run with unittest.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## 📜 License
+MIT License. See [LICENSE](LICENSE) for full text.
+
+## 🙏 Acknowledgments
+- Powered by [Moonshot AI](https://moonshot.ai) (Kimi models).
+- Embeddings via [Sentence Transformers](https://huggingface.co/sentence-transformers).
+- Vector DB: [ChromaDB](https://chromadb.org).
+- Inspired by advanced AI architectures like Auto-GPT and LangChain.
+
+Star the repo if you find it useful! ⭐ Questions? Open an issue.
+
+---
+*Built by buckster123 with ❤️ and AI flair. Evolve or perish!*
