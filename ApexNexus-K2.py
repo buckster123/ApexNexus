@@ -149,7 +149,7 @@ def load_prompt_files():
 SANDBOX_DIR = "./sandbox"
 os.makedirs(SANDBOX_DIR, exist_ok=True)
 # YAML Directory for agent instructions (create if not exists)
-YAML_DIR = "./sandbox/legacy-module-archive/full"
+YAML_DIR = "./sandbox/evo-modules"
 os.makedirs(YAML_DIR, exist_ok=True)
 # Custom CSS for UI
 st.markdown(
@@ -2201,7 +2201,7 @@ def call_xai_api(
         global tool_count, council_count, main_count
         max_iterations = 500
         tool_calls_per_convo = st.session_state.get("tool_calls_per_convo", 0)
-        if tool_calls_per_convo > 100:  # Rate limiting
+        if tool_calls_per_convo > 200:  # Rate limiting
             yield ('content', "Error: Tool call limit exceeded for this conversation.")
             return
         for iteration in range(max_iterations):
@@ -2287,7 +2287,7 @@ def call_xai_api(
 
 # Login Page
 def login_page():
-    st.title("Apex MetaHive Interface")
+    st.title("Apex On Kimi Interface")
     tab1, tab2 = st.tabs(["Login", "Register"])
     with tab1:
         with st.form("login_form"):
@@ -2372,12 +2372,12 @@ def render_sidebar():  # noqa: C901
         st.header("Chat Settings")
         st.selectbox(
             "Select Model",
-            ["kimi-k2-thinking-turbo", "kimi-k2-thinking", "kimi-k1.5", "kimi-k1.5-long"],
+            ["kimi-k2-thinking", "kimi-k2", "kimi-k1.5", "kimi-k1.5-long"],
             key="model_select",
         )
         st.selectbox(
             "Select Council Model",
-            ["kimi-k2-thinking-turbo", "kimi-k2-thinking", "kimi-k1.5", "kimi-k1.5-long"],
+            ["kimi-k2-thinking", "kimi-k2", "kimi-k1.5", "kimi-k1.5-long"],
             key="council_model_select",
         )
         prompt_files = load_prompt_files()
@@ -2447,7 +2447,7 @@ def render_sidebar():  # noqa: C901
 
 
 def render_chat_interface(model, custom_prompt, enable_tools, uploaded_images):
-    st.title(f"Apex MetaHive - {st.session_state['user']}")
+    st.title(f"Apex On Kimi - {st.session_state['user']}")
     # --- Main Chat Interface ---
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
@@ -2457,7 +2457,7 @@ def render_chat_interface(model, custom_prompt, enable_tools, uploaded_images):
         st.session_state["tool_calls_per_convo"] = 0
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
-            st.markdown(msg["content"], unsafe_allow_html=True)
+            st.markdown(msg["content"], unsafe_allow_html=False)
     if prompt := st.chat_input("Your command, ape?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
@@ -2472,34 +2472,28 @@ def render_chat_interface(model, custom_prompt, enable_tools, uploaded_images):
                 image_files=images_to_process,
                 enable_tools=enable_tools,
             )
+            thinking_expander = st.expander("Thinking...", expanded=True)
             thinking_stream = ""
+            thinking_placeholder = thinking_expander.empty()
+            response_container = st.container()
             response_stream = ""
+            response_placeholder = response_container.empty()
+            tool_container = st.container()
             tool_stream = ""
-            response_html = ""
-            assistant_placeholder = st.empty()
+            tool_placeholder = tool_container.empty()
+            full_response = ""
             for part in generator:
                 ptype, pcontent = part
                 if ptype == 'reasoning':
                     thinking_stream += pcontent
+                    thinking_placeholder.markdown(thinking_stream)
                 elif ptype == 'content':
                     response_stream += pcontent
+                    response_placeholder.markdown(response_stream)
+                    full_response += pcontent
                 elif ptype == 'tool':
                     tool_stream += pcontent
-                response_html = f"""
-<details>
-<summary>Thinking...</summary>
-{html.escape(thinking_stream)}
-</details>
-
-<details>
-<summary>Tools</summary>
-{html.escape(tool_stream)}
-</details>
-
-{response_stream}
-"""
-                assistant_placeholder.markdown(response_html, unsafe_allow_html=True)
-            full_response = response_html
+                    tool_placeholder.markdown(tool_stream)
         st.session_state.messages.append(
             {"role": "assistant", "content": full_response}
         )
