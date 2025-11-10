@@ -38,7 +38,7 @@ At its core, ApexNexus leverages the **Kimi K2** model from Moonshot AI, integra
 
 ### Key Components:
 1. **Agent Instruction**: A comprehensive bootstrap prompt defining roles, principles, boot sequences, workflows, and tool references. (See [ApexNexus.txt] for full details.)
-2. **Main Script**: A Streamlit-powered Python app handling UI, tool dispatch, database interactions, and API calls. (See [app.py](app.py).)
+2. **Main Script**: A Streamlit-powered Python app handling UI, tool dispatch, database interactions, and API calls. (See [ApexNexus.py](ApexNexus.py).)
 3. **Sandbox Environment**: Isolated filesystem, venvs, and restricted executions for security.
 4. **Databases**: SQLite for users/history/memory; ChromaDB for vector embeddings.
 5. **Evo-Modules**: YAML-based modules in `sandbox/evo-data/system` for dynamic extensions like meta-cognition or anomaly detection.
