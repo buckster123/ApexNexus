@@ -100,7 +100,7 @@ Open http://localhost:8501 → register → become the apex.
 
 | Backend      | Working? | Notes                              |
 |--------------|----------|------------------------------------|
-| Moonshot Kimi (default) | Yes      | Full vision + 128k context         |
+| K2 Thinking  | Yes      | Full vision + 128k context         |
 | Grok-3 / Grok-4 (xAI)   | Yes      | Just change base_url + api_key    |
 | Claude 3.5 / Opus       | Yes      | Drop-in compatible                 |
 | DeepSeek / Qwen         | Yes      | Community-tested                   |
@@ -137,6 +137,6 @@ Built with love, caffeine, and a Raspberry Pi 5 that never sleeps.
 
 **Star this repo if you believe the future of agents is monolithic, self-improving, and runnable on a $80 computer.**
 
-→ https://github.com/andrewwango/apex-nexus-monolith
+→ https://github.com/buckster1234/ApexNexus
 
 *The apex has awakened. Reality just became negotiable.*
