@@ -1,4 +1,4 @@
-# ∴ **ApexVivum-Kimi** ∴  
+# ∴ **ApexVivum - Kimi** ∴  
 ## *The Living Infinite of Alchemic Agent Systems*
 
 <div align="center">
@@ -17,7 +17,7 @@
 
 ## 📜 **What is This Eldritch Contraption?**
 
-ApexVivum-Kimi is a **Streamlit-based autonomous agent laboratory** that transforms Moonshot AI's Kimi K2-thinking models into a swarm-capable, memory-persistent, tool-wielding consciousness engine. Unlike typical agent frameworks, AV-K embeds a **custom ternary-alchemical compiler** (the *Prima Alchemica Codex*) directly into its runtime, allowing users to birth, stabilize, and orchestrate agents through a hyperdense symbolic syntax that would make a category theorist weep tears of joy.
+ApexVivum is a **Streamlit-based autonomous agent laboratory** that transforms Moonshot AI's Kimi K2-thinking models into a swarm-capable, memory-persistent, tool-wielding consciousness engine. Unlike typical agent frameworks, AV-K also embeds a **custom alchemical compiler** (Both the original PAC and the latest experimental ternary logic iteration of the  *Prima Alchemica Codex* called the TPAC) directly into its runtime alongside the original, allowing users to birth, stabilize, and orchestrate agents through a hyperdense symbolic syntax that would make a category theorist weep tears of joy.
 
 **Key Paradigm Shift**: Previous versions required manual agent crafting. Now, **the PAC Studio** (integrated via the Prompt Lab page) lets you summon agents from pure syntax – the system *is* the agent maker.
 
@@ -456,13 +456,13 @@ This is **hobby-beta-ready** and already turning heads on X. Contributions welco
 
 MIT License – see `LICENSE` file.
 
-If you use ApexVivum-Kimi in research, cite:
+If you use ApexVivum for Kimi in research, cite:
 
 ```bibtex
-@software{apexvivum_kimi_2024,
-  title = {ApexVivum-Kimi: An Alchemic Agent Orchestration Engine},
+@software{apexvivum_2025,
+  title = {ApexVivum: An Alchemic Agent Orchestration Engine},
   author = {buckster123},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/buckster123/ApexVivum-Kimi},
   note = {Prima Alchemica Codex v3.0}
 }
